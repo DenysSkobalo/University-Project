@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2d7pp608b8n1"
-path="res://.godot/imported/_pick up.png-4cffcc64dc0062340defe6dd40e67b5c.ctex"
+uid="uid://cxn5rbdch5ltl"
+path="res://.godot/imported/_side attack.png-778b76836d38b252c2a54646a51c9ee8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/RPGMCharacter_v1.0/_pick up.png"
-dest_files=["res://.godot/imported/_pick up.png-4cffcc64dc0062340defe6dd40e67b5c.ctex"]
+source_file="res://assets/player/_side attack.png"
+dest_files=["res://.godot/imported/_side attack.png-778b76836d38b252c2a54646a51c9ee8.ctex"]
 
 [params]
 

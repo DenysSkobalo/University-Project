@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cadlk7n38wub7"
-path="res://.godot/imported/_up idle.png-9f0b47e2c0990d0596cf81371ac10878.ctex"
+uid="uid://xx4u2dhi3xem"
+path="res://.godot/imported/_down attack.png-7ac5cc044584e7471c21157df5ca9beb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/RPGMCharacter_v1.0/_up idle.png"
-dest_files=["res://.godot/imported/_up idle.png-9f0b47e2c0990d0596cf81371ac10878.ctex"]
+source_file="res://assets/player/_down attack.png"
+dest_files=["res://.godot/imported/_down attack.png-7ac5cc044584e7471c21157df5ca9beb.ctex"]
 
 [params]
 

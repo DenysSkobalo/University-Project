@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://l6y8krhbi65l"
-path="res://.godot/imported/top-down-forest-preview.png-d4284003997f1af581d91a5b0decc5a9.ctex"
+uid="uid://dtanv2qgubj2k"
+path="res://.godot/imported/_up idle.png-91b306db09113a6f35fe2a86d18016c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Top-Down-Forest/top-down-forest-preview.png"
-dest_files=["res://.godot/imported/top-down-forest-preview.png-d4284003997f1af581d91a5b0decc5a9.ctex"]
+source_file="res://assets/player/_up idle.png"
+dest_files=["res://.godot/imported/_up idle.png-91b306db09113a6f35fe2a86d18016c1.ctex"]
 
 [params]
 

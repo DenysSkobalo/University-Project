@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4oseuil8yfp0"
-path="res://.godot/imported/_up walk.png-bc43841dbdea6cdf27669f4fa5957ea8.ctex"
+uid="uid://b1pkhuj2i62qd"
+path="res://.godot/imported/_up walk.png-eb714a3948f4ad2cdbc87274b75f57da.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/RPGMCharacter_v1.0/_up walk.png"
-dest_files=["res://.godot/imported/_up walk.png-bc43841dbdea6cdf27669f4fa5957ea8.ctex"]
+source_file="res://assets/player/_up walk.png"
+dest_files=["res://.godot/imported/_up walk.png-eb714a3948f4ad2cdbc87274b75f57da.ctex"]
 
 [params]
 
