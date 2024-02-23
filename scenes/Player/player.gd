@@ -2,16 +2,21 @@ extends CharacterBody2D
 
 #@onready var anim = get_node("AnimatedSprite2D")
 @onready var anim = $AnimatedSprite2D
+@export var speed: int = 150
 
 var direction: Vector2 = Vector2.ZERO
-@export var speed: int = 150
+# Save last direction move
+var last_direction: Vector2 = Vector2.DOWN
 
 func _process(delta):
 	direction = Input.get_vector("Left","Right","Up","Down")
 
 func _physics_process(delta):
 	velocity = direction * speed
+	
 	if direction != Vector2.ZERO:
+		last_direction = direction
+		
 		if direction.y < 0:
 			anim.play("Up Walk"	)
 		elif direction.y > 0:
@@ -22,7 +27,13 @@ func _physics_process(delta):
 	else: 
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.y = move_toward(velocity.y, 0, speed)
-		anim.play("Down Idle")
-		anim.flip_h = false
 		
+		if last_direction.y < 0: 
+			anim.play("Up Idle")
+		elif last_direction.y > 0:
+			anim.play("Down Idle")
+		elif last_direction.x != 0:
+			anim.play("Side Idle")
+			anim.flip_h = last_direction.x > 0
+
 	move_and_slide()
