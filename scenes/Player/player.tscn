@@ -9,8 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b1pkhuj2i62qd" path="res://assets/player/_up walk.png" id="7_21hhl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xi2py"]
-radius = 11.0
-height = 40.0
+radius = 9.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tsj2g"]
 atlas = ExtResource("2_wciyb")
@@ -277,6 +276,8 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_ebn6v")
 speed = 200
 

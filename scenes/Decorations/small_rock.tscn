@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmn5232jd7gmm"]
+
+[ext_resource type="Texture2D" uid="uid://dbe1u0gdufu40" path="res://assets/Pixelarium - GrassLands - Free Version/Pack content/Sprites/Rocks/spr_boulder4.png" id="1_n67p6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tstg3"]
+height = 20.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5n25y"]
+atlas = ExtResource("1_n67p6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kltip"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5n25y")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="small_rock" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_tstg3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, 1)
+sprite_frames = SubResource("SpriteFrames_kltip")
+animation = &"Idle"

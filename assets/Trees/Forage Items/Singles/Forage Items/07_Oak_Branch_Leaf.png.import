@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b10hmltlbxvgs"
-path="res://.godot/imported/top-down-town-preview.png-62c31b427ae09019aded81ad1af3c0b1.ctex"
+uid="uid://n27qv2ixk3rd"
+path="res://.godot/imported/07_Oak_Branch_Leaf.png-3c919cfa0115fa2c1e06e4881c631576.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Top-Down-Town/top-down-town-preview.png"
-dest_files=["res://.godot/imported/top-down-town-preview.png-62c31b427ae09019aded81ad1af3c0b1.ctex"]
+source_file="res://assets/Trees/Forage Items/Singles/Forage Items/07_Oak_Branch_Leaf.png"
+dest_files=["res://.godot/imported/07_Oak_Branch_Leaf.png-3c919cfa0115fa2c1e06e4881c631576.ctex"]
 
 [params]
 

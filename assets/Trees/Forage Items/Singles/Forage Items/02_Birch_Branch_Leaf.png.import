@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dh7rq7q866qma"
-path="res://.godot/imported/top-down-town-tileset.png-900e5ebc96630349102e4f61cbec8799.ctex"
+uid="uid://bgounnl5ktb8d"
+path="res://.godot/imported/02_Birch_Branch_Leaf.png-75d0eb5ea05de394590d1d10d1486afe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Top-Down-Town/PNG/top-down-town-tileset.png"
-dest_files=["res://.godot/imported/top-down-town-tileset.png-900e5ebc96630349102e4f61cbec8799.ctex"]
+source_file="res://assets/Trees/Forage Items/Singles/Forage Items/02_Birch_Branch_Leaf.png"
+dest_files=["res://.godot/imported/02_Birch_Branch_Leaf.png-75d0eb5ea05de394590d1d10d1486afe.ctex"]
 
 [params]
 

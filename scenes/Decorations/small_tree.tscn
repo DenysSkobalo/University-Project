@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://baq0nge3jspoj"]
+
+[ext_resource type="Texture2D" uid="uid://dp2usudmu0iyv" path="res://assets/Trees/Shadow/Black Outline/Premium_Trees_Black_Outline.png" id="1_ouikc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_is6es"]
+radius = 4.0
+height = 22.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47w35"]
+atlas = ExtResource("1_ouikc")
+region = Rect2(384, 112, 64, 112)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bem6g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47w35")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="small_tree" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 27)
+shape = SubResource("CapsuleShape2D_is6es")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bem6g")
+animation = &"Idle"

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="University-project"
-run/main_scene="res://scenes/Island/island.tscn"
+run/main_scene="res://scenes/World/world.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -46,6 +46,7 @@ Down={
 
 2d_physics/layer_1="world"
 2d_physics/layer_2="player"
+2d_physics/layer_3="decorations"
 
 [rendering]
 
