@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://disjv075cbxnf"]
+
+[ext_resource type="Texture2D" uid="uid://ci54nn0euw3um" path="res://assets/Campfire/spr_campfire_burning.png" id="2_n1j46"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pblrr"]
+atlas = ExtResource("2_n1j46")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3wa56"]
+atlas = ExtResource("2_n1j46")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pl8bv"]
+atlas = ExtResource("2_n1j46")
+region = Rect2(64, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqbyj"]
+atlas = ExtResource("2_n1j46")
+region = Rect2(96, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eghn6"]
+atlas = ExtResource("2_n1j46")
+region = Rect2(128, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fvghn"]
+atlas = ExtResource("2_n1j46")
+region = Rect2(160, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6tbx"]
+atlas = ExtResource("2_n1j46")
+region = Rect2(192, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6srag"]
+atlas = ExtResource("2_n1j46")
+region = Rect2(224, 0, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ivaod"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pblrr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3wa56")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pl8bv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqbyj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eghn6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fvghn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6tbx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6srag")
+}],
+"loop": true,
+"name": &"Burning",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2tkxq"]
+radius = 15.0
+height = 50.0
+
+[node name="Campfire" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ivaod")
+animation = &"Burning"
+autoplay = "Burning"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("CapsuleShape2D_2tkxq")

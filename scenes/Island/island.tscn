@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://caprtfuivr2yb"]
+[gd_scene load_steps=9 format=3 uid="uid://caprtfuivr2yb"]
 
 [ext_resource type="Texture2D" uid="uid://b6ph3ruxqd613" path="res://assets/forest_tile_set/ground.png" id="1_xsohi"]
 [ext_resource type="Texture2D" uid="uid://dqusu8vkga1yk" path="res://assets/forest_tile_set/water.png" id="2_ddhlq"]
 [ext_resource type="PackedScene" uid="uid://5knjfvrne1bm" path="res://scenes/Player/player.tscn" id="2_hjsud"]
+[ext_resource type="PackedScene" uid="uid://disjv075cbxnf" path="res://scenes/Campfire/campfire.tscn" id="4_40136"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_01hnq"]
 texture = ExtResource("1_xsohi")
@@ -229,3 +230,6 @@ layer_0/tile_data = PackedInt32Array(65535, 131072, 1, 131071, 131072, 1, 196607
 
 [node name="Player" parent="." instance=ExtResource("2_hjsud")]
 position = Vector2(504, 375)
+
+[node name="Campfire" parent="." instance=ExtResource("4_40136")]
+position = Vector2(565, 324)
