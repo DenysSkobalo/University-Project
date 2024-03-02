@@ -1,20 +1,34 @@
 extends CharacterBody2D
 
+class_name Player
+
 # Accessing the AnimatedSprite2D node
 #@onready var anim = get_node("AnimatedSprite2D")
 @onready var anim = $AnimatedSprite2D
 
 # Speed variable for the character
-@export var speed: int = 150
+@export var speed: int = 100
 
 # Variable to store the current direction of character movement
 var direction: Vector2 = Vector2.ZERO
 # Variable to store the last direction of character movement
 var last_direction: Vector2 = Vector2.DOWN
 
+@export var branches: int = 0
+
+@export var maxHealth : int = 100 
+@onready var healthBar = $"../CanvasLayer/HealthBarPlayer"
+
+@export var campfire: Campfire
+
 # Processing user input
 func _process(delta):
 	direction = Input.get_vector("Left","Right","Up","Down")
+
+# Increase in branches
+func pick_up():
+	print("Pick up one branch")
+	branches += 1
 
 # Physics processing for movement and animation
 func _physics_process(delta):
@@ -47,4 +61,5 @@ func _physics_process(delta):
 			anim.play("Side Idle")
 			anim.flip_h = last_direction.x > 0
 
+	healthBar.value = maxHealth
 	move_and_slide()

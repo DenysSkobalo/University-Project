@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://caprtfuivr2yb"]
+[gd_scene load_steps=13 format=3 uid="uid://caprtfuivr2yb"]
 
 [ext_resource type="PackedScene" uid="uid://b8hjd1s2nx1or" path="res://scenes/World/dirt.tscn" id="1_ohtsb"]
 [ext_resource type="PackedScene" uid="uid://bdprxkfvu1458" path="res://scenes/World/water.tscn" id="2_qggun"]
@@ -9,6 +9,22 @@
 [ext_resource type="PackedScene" uid="uid://bb33715q65k45" path="res://scenes/Decorations/felled_tree.tscn" id="7_liy08"]
 [ext_resource type="PackedScene" uid="uid://baq0nge3jspoj" path="res://scenes/Decorations/small_tree.tscn" id="8_0lc70"]
 [ext_resource type="PackedScene" uid="uid://cmn5232jd7gmm" path="res://scenes/Decorations/small_rock.tscn" id="9_2uu17"]
+[ext_resource type="PackedScene" uid="uid://ckhhbipehb6dn" path="res://scenes/Collectibles/branch.tscn" id="10_igcmc"]
+[ext_resource type="Texture2D" uid="uid://81xvvxolig7f" path="res://assets/Trees/Forage Items/Singles/Forage Items/06_Oak_Branch.png" id="11_o8ioq"]
+
+[sub_resource type="GDScript" id="GDScript_oyc4f"]
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	text = str($\"../../../Player\".branches)
+"
 
 [node name="World" type="Node"]
 
@@ -18,9 +34,12 @@
 
 [node name="Campfire" parent="." instance=ExtResource("4_ekjaf")]
 position = Vector2(373, 313)
+collision_layer = 2
+collision_mask = 2
 
 [node name="Player" parent="." instance=ExtResource("3_50o4x")]
-position = Vector2(342, 285)
+position = Vector2(389, 265)
+collision_mask = 7
 
 [node name="Decorations" type="Node2D" parent="."]
 position = Vector2(354, 255)
@@ -180,3 +199,67 @@ position = Vector2(-53, -190)
 
 [node name="small_rock7" parent="Decorations" instance=ExtResource("9_2uu17")]
 position = Vector2(457, 11)
+
+[node name="Collectibles" type="Node2D" parent="."]
+position = Vector2(42, 163)
+
+[node name="Branch" parent="Collectibles" instance=ExtResource("10_igcmc")]
+position = Vector2(261, 205)
+
+[node name="Branch2" parent="Collectibles" instance=ExtResource("10_igcmc")]
+position = Vector2(406, 82)
+
+[node name="Branch3" parent="Collectibles" instance=ExtResource("10_igcmc")]
+position = Vector2(228, 159)
+
+[node name="Branch4" parent="Collectibles" instance=ExtResource("10_igcmc")]
+position = Vector2(266, 104)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BranchesLabel" type="Node2D" parent="CanvasLayer"]
+
+[node name="BranchCount" type="Label" parent="CanvasLayer/BranchesLabel"]
+offset_left = 51.0
+offset_top = 135.0
+offset_right = 84.0
+offset_bottom = 166.0
+theme_override_font_sizes/font_size = 22
+script = SubResource("GDScript_oyc4f")
+
+[node name="BranchSpriteIcon" type="Sprite2D" parent="CanvasLayer/BranchesLabel"]
+position = Vector2(90, 150)
+texture = ExtResource("11_o8ioq")
+
+[node name="HealthCampfire" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 45.0
+offset_top = 168.0
+offset_right = 203.0
+offset_bottom = 202.0
+theme_override_font_sizes/font_size = 24
+text = "HP Campfire: "
+
+[node name="HealthBarCampfire" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 43.0
+offset_top = 94.0
+offset_right = 309.0
+offset_bottom = 130.0
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="CanvasLayer/HealthBarCampfire"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 3.0
+offset_right = 178.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 22
+text = "Campfire :"
+
+[node name="HealthBarPlayer" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 44.0
+offset_top = 42.0
+offset_right = 309.0
+offset_bottom = 78.0
+value = 100.0
