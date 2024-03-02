@@ -19,11 +19,42 @@ var last_direction: Vector2 = Vector2.DOWN
 @export var maxHealth : int = 100 
 @onready var healthBar = $"../CanvasLayer/HealthBarPlayer"
 
-@export var campfire: Campfire
+
+@export var class_campfire: Campfire
+@onready var campfire = get_node_or_null("../Campfire") as Campfire
 
 # Processing user input
 func _process(delta):
 	direction = Input.get_vector("Left","Right","Up","Down")
+	if Input.is_action_just_pressed("Interact") and is_near_campfire():
+		throw_branch()
+
+# Приєднання сигналу до функції `add_health` багаття
+func _ready():
+	var callable = Callable(class_campfire, "add_health")
+	connect("throw_branch_to_campfire", callable)
+	
+	if not campfire:
+		print("Помилка: вузол 'Campfire' не знайдено.")
+	else:
+		print("Вузол 'Campfire' успішно знайдено.")
+	
+# Сигнал, який повідомляє про те, що гравець кидає гілку в багаття
+signal throw_branch_to_campfire(amount)
+
+func throw_branch():
+	if branches > 0 and is_near_campfire():
+		branches -= 1
+		if campfire:
+			campfire.add_health(2) # Переконайтесь, що метод існує в класі Campfire
+		else:
+			print("Помилка: спроба викликати 'add_health' на неіснуючому об'єкті.")
+
+func is_near_campfire() -> bool:
+	if not campfire:
+		return false
+	return global_position.distance_to(campfire.global_position) < 50
+
 
 # Increase in branches
 func pick_up():
