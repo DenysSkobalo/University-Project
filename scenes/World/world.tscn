@@ -10,19 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://baq0nge3jspoj" path="res://scenes/Decorations/small_tree.tscn" id="8_0lc70"]
 [ext_resource type="PackedScene" uid="uid://cmn5232jd7gmm" path="res://scenes/Decorations/small_rock.tscn" id="9_2uu17"]
 [ext_resource type="Script" path="res://scenes/World/Collectibles.gd" id="10_aieom"]
-[ext_resource type="PackedScene" uid="uid://ckhhbipehb6dn" path="res://scenes/Collectibles/branch.tscn" id="10_igcmc"]
+[ext_resource type="PackedScene" uid="uid://cpux8jskt4x4a" path="res://scenes/Collectibles/branch.tscn" id="10_igcmc"]
 [ext_resource type="Texture2D" uid="uid://81xvvxolig7f" path="res://assets/Trees/Forage Items/Singles/Forage Items/06_Oak_Branch.png" id="11_o8ioq"]
 
 [sub_resource type="GDScript" id="GDScript_oyc4f"]
 script/source = "extends Label
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	text = str($\"../../../Player\".branches)
 "

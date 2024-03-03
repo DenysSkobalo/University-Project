@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://bolsehhhbvsjr"]
 
 [ext_resource type="Script" path="res://scenes/Campfire/campfire.gd" id="1_euodd"]
-[ext_resource type="Texture2D" uid="uid://ci54nn0euw3um" path="res://assets/Campfire/spr_campfire_burning.png" id="1_tlp83"]
+[ext_resource type="Texture2D" uid="uid://ci54nn0euw3um" path="res://assets/Pixelarium - GrassLands - Free Version/Pack content/Animated sprites/Animated Campfire/spr_campfire_burning.png" id="1_tlp83"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ums5s"]
 radius = 15.0333
@@ -87,6 +87,7 @@ autoplay = "Burning"
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
+wait_time = 3.0
 autostart = true
 
 [node name="Area2D" type="Area2D" parent="."]

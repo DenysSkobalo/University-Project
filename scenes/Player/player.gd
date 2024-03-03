@@ -39,7 +39,6 @@ func is_near_campfire() -> bool:
 
 func pick_up():
 	branches += 1
-	#queue_free()
 
 func _physics_process(delta):
 	var moving = direction != Vector2.ZERO

@@ -1,22 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckhhbipehb6dn"]
+[gd_scene load_steps=4 format=3 uid="uid://cpux8jskt4x4a"]
 
-[ext_resource type="Script" path="res://scenes/Collectibles/branch.gd" id="1_6odli"]
-[ext_resource type="Texture2D" uid="uid://81xvvxolig7f" path="res://assets/Trees/Forage Items/Singles/Forage Items/06_Oak_Branch.png" id="1_h3btc"]
+[ext_resource type="Texture2D" uid="uid://81xvvxolig7f" path="res://assets/Trees/Forage Items/Singles/Forage Items/06_Oak_Branch.png" id="1_a56x1"]
+[ext_resource type="Script" path="res://scenes/Collectibles/branch.gd" id="1_bptq1"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_j84kf"]
-a = Vector2(5, -5)
-b = Vector2(-6, 5)
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_0boo1"]
+a = Vector2(4, -4)
+b = Vector2(-5, 5)
 
-[node name="branch" type="Area2D"]
+[node name="Area2D" type="Area2D"]
 collision_layer = 8
 collision_mask = 2
-script = ExtResource("1_6odli")
+script = ExtResource("1_bptq1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("SegmentShape2D_j84kf")
+shape = SubResource("SegmentShape2D_0boo1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5625, 0.5625)
-texture = ExtResource("1_h3btc")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_a56x1")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
