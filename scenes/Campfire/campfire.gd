@@ -22,9 +22,16 @@ func _on_timer_timeout():
 	maxHealth = max(maxHealth - decrease_rate, 0)
 	update_health_display()
 	
+	if maxHealth <= 0:
+		end_game()
+	
 	time_until_next_decrease -= 1.0
 	if time_until_next_decrease <= 0 and decrease_rate < MAX_DECREASE_RATE:
 		increase_decrease_rate()
+		
+		
+func end_game():
+	get_tree().change_scene_to_file("res://scenes/game_over/game_over.tscn")
 
 func increase_decrease_rate():
 	decrease_rate += 1

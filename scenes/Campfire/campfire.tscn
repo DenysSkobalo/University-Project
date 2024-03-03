@@ -87,7 +87,7 @@ autoplay = "Burning"
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
-wait_time = 3.0
+wait_time = 2.0
 autostart = true
 
 [node name="Area2D" type="Area2D" parent="."]
