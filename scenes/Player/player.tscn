@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://5knjfvrne1bm"]
+[gd_scene load_steps=56 format=3 uid="uid://5knjfvrne1bm"]
 
 [ext_resource type="Script" path="res://scenes/Player/player.gd" id="1_ebn6v"]
 [ext_resource type="Texture2D" uid="uid://dy0q5sk61bdwb" path="res://assets/player/_down idle.png" id="2_wciyb"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://dtanv2qgubj2k" path="res://assets/player/_up idle.png" id="4_lpq7g"]
 [ext_resource type="Texture2D" uid="uid://bq407185t5i8k" path="res://assets/player/_side walk.png" id="5_iead3"]
 [ext_resource type="Texture2D" uid="uid://b1pkhuj2i62qd" path="res://assets/player/_up walk.png" id="7_21hhl"]
+[ext_resource type="Texture2D" uid="uid://xx4u2dhi3xem" path="res://assets/player/_down attack.png" id="8_i1dx5"]
+[ext_resource type="Texture2D" uid="uid://cxn5rbdch5ltl" path="res://assets/player/_side attack.png" id="9_5bvag"]
+[ext_resource type="Texture2D" uid="uid://c7wu3d0fo2aqr" path="res://assets/player/_up attack.png" id="10_oiudc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xi2py"]
 radius = 9.0
@@ -143,6 +146,42 @@ region = Rect2(0, 64, 64, 64)
 atlas = ExtResource("7_21hhl")
 region = Rect2(64, 64, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ju3pf"]
+atlas = ExtResource("8_i1dx5")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c76ys"]
+atlas = ExtResource("8_i1dx5")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwkfi"]
+atlas = ExtResource("8_i1dx5")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j5xgq"]
+atlas = ExtResource("9_5bvag")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tk7go"]
+atlas = ExtResource("9_5bvag")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tm0bq"]
+atlas = ExtResource("9_5bvag")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgsal"]
+atlas = ExtResource("10_oiudc")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdto2"]
+atlas = ExtResource("10_oiudc")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmec8"]
+atlas = ExtResource("10_oiudc")
+region = Rect2(0, 64, 64, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_tvf83"]
 animations = [{
 "frames": [{
@@ -273,10 +312,55 @@ animations = [{
 "loop": true,
 "name": &"Up Walk",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ju3pf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c76ys")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwkfi")
+}],
+"loop": true,
+"name": &"down_attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j5xgq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tk7go")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tm0bq")
+}],
+"loop": true,
+"name": &"side_attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jgsal")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdto2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmec8")
+}],
+"loop": true,
+"name": &"up_attack",
+"speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_qml3m"]
+radius = 16.1245
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-collision_layer = 2
+collision_layer = 18
 collision_mask = 5
 script = ExtResource("1_ebn6v")
 speed = 200
@@ -288,7 +372,7 @@ shape = SubResource("CapsuleShape2D_xi2py")
 position = Vector2(-1, -1)
 scale = Vector2(1.125, 1.125)
 sprite_frames = SubResource("SpriteFrames_tvf83")
-animation = &"Side Idle"
+animation = &"up_attack"
 autoplay = "Down Idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -301,3 +385,15 @@ limit_right = 1232
 limit_bottom = 736
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
+
+[node name="player_hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_hitbox"]
+shape = SubResource("CircleShape2D_qml3m")
+
+[node name="attack_cooldown" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
+[connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]
+[connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]

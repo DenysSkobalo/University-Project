@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://caprtfuivr2yb"]
+[gd_scene load_steps=15 format=3 uid="uid://caprtfuivr2yb"]
 
 [ext_resource type="PackedScene" uid="uid://b8hjd1s2nx1or" path="res://scenes/World/dirt.tscn" id="1_ohtsb"]
 [ext_resource type="PackedScene" uid="uid://bdprxkfvu1458" path="res://scenes/World/water.tscn" id="2_qggun"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cmn5232jd7gmm" path="res://scenes/Decorations/small_rock.tscn" id="9_2uu17"]
 [ext_resource type="Script" path="res://scenes/World/Collectibles.gd" id="10_aieom"]
 [ext_resource type="Texture2D" uid="uid://81xvvxolig7f" path="res://assets/Trees/Forage Items/Singles/Forage Items/06_Oak_Branch.png" id="11_o8ioq"]
+[ext_resource type="PackedScene" uid="uid://rdsyn7166dbh" path="res://scenes/Mobs/slime.tscn" id="12_c1hxx"]
 
 [sub_resource type="GDScript" id="GDScript_oyc4f"]
 script/source = "extends Label
@@ -45,6 +46,9 @@ collision_mask = 2
 [node name="Player" parent="." instance=ExtResource("3_50o4x")]
 position = Vector2(389, 265)
 collision_mask = 7
+
+[node name="Slime" parent="." instance=ExtResource("12_c1hxx")]
+position = Vector2(473, 125)
 
 [node name="Decorations" type="Node2D" parent="."]
 position = Vector2(354, 255)
