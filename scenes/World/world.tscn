@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://baq0nge3jspoj" path="res://scenes/Decorations/small_tree.tscn" id="8_0lc70"]
 [ext_resource type="PackedScene" uid="uid://cmn5232jd7gmm" path="res://scenes/Decorations/small_rock.tscn" id="9_2uu17"]
 [ext_resource type="Script" path="res://scenes/World/Collectibles.gd" id="10_aieom"]
-[ext_resource type="PackedScene" uid="uid://cpux8jskt4x4a" path="res://scenes/Collectibles/branch.tscn" id="10_igcmc"]
 [ext_resource type="Texture2D" uid="uid://81xvvxolig7f" path="res://assets/Trees/Forage Items/Singles/Forage Items/06_Oak_Branch.png" id="11_o8ioq"]
 
 [sub_resource type="GDScript" id="GDScript_oyc4f"]
@@ -18,6 +17,18 @@ script/source = "extends Label
 
 func _process(delta):
 	text = str($\"../../../Player\".branches)
+"
+
+[sub_resource type="GDScript" id="GDScript_83p0h"]
+script/source = "extends Label
+
+var game_time = 0
+
+func _on_game_timer_timeout():
+	game_time += 1
+	var minutes = game_time / 60
+	var seconds = game_time % 60
+	$\".\".text = \"Game Time: %02d:%02d\" % [minutes, seconds]
 "
 
 [node name="World" type="Node"]
@@ -202,9 +213,6 @@ script = ExtResource("10_aieom")
 wait_time = 3.0
 autostart = true
 
-[node name="Branch" parent="Collectibles" instance=ExtResource("10_igcmc")]
-position = Vector2(261, 205)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="BranchesLabel" type="Node2D" parent="CanvasLayer"]
@@ -245,4 +253,16 @@ offset_right = 309.0
 offset_bottom = 78.0
 value = 100.0
 
+[node name="GameTimerLabel" type="Label" parent="CanvasLayer"]
+offset_left = 60.0
+offset_top = 178.0
+offset_right = 157.0
+offset_bottom = 201.0
+text = "Game Time: "
+script = SubResource("GDScript_83p0h")
+
+[node name="GameTimer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="timeout" from="Collectibles/Timer" to="Collectibles" method="_on_timer_timeout"]
+[connection signal="timeout" from="GameTimer" to="CanvasLayer/GameTimerLabel" method="_on_game_timer_timeout"]
