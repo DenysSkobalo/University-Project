@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://caprtfuivr2yb"]
+[gd_scene load_steps=14 format=3 uid="uid://caprtfuivr2yb"]
 
 [ext_resource type="PackedScene" uid="uid://b8hjd1s2nx1or" path="res://scenes/World/dirt.tscn" id="1_ohtsb"]
 [ext_resource type="PackedScene" uid="uid://bdprxkfvu1458" path="res://scenes/World/water.tscn" id="2_qggun"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bb33715q65k45" path="res://scenes/Decorations/felled_tree.tscn" id="7_liy08"]
 [ext_resource type="PackedScene" uid="uid://baq0nge3jspoj" path="res://scenes/Decorations/small_tree.tscn" id="8_0lc70"]
 [ext_resource type="PackedScene" uid="uid://cmn5232jd7gmm" path="res://scenes/Decorations/small_rock.tscn" id="9_2uu17"]
+[ext_resource type="Script" path="res://scenes/World/Collectibles.gd" id="10_aieom"]
 [ext_resource type="PackedScene" uid="uid://ckhhbipehb6dn" path="res://scenes/Collectibles/branch.tscn" id="10_igcmc"]
 [ext_resource type="Texture2D" uid="uid://81xvvxolig7f" path="res://assets/Trees/Forage Items/Singles/Forage Items/06_Oak_Branch.png" id="11_o8ioq"]
 
@@ -202,18 +203,14 @@ position = Vector2(457, 11)
 
 [node name="Collectibles" type="Node2D" parent="."]
 position = Vector2(42, 163)
+script = ExtResource("10_aieom")
+
+[node name="Timer" type="Timer" parent="Collectibles"]
+wait_time = 3.0
+autostart = true
 
 [node name="Branch" parent="Collectibles" instance=ExtResource("10_igcmc")]
 position = Vector2(261, 205)
-
-[node name="Branch2" parent="Collectibles" instance=ExtResource("10_igcmc")]
-position = Vector2(406, 82)
-
-[node name="Branch3" parent="Collectibles" instance=ExtResource("10_igcmc")]
-position = Vector2(228, 159)
-
-[node name="Branch4" parent="Collectibles" instance=ExtResource("10_igcmc")]
-position = Vector2(266, 104)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -230,15 +227,6 @@ script = SubResource("GDScript_oyc4f")
 [node name="BranchSpriteIcon" type="Sprite2D" parent="CanvasLayer/BranchesLabel"]
 position = Vector2(90, 150)
 texture = ExtResource("11_o8ioq")
-
-[node name="HealthCampfire" type="Label" parent="CanvasLayer"]
-visible = false
-offset_left = 45.0
-offset_top = 168.0
-offset_right = 203.0
-offset_bottom = 202.0
-theme_override_font_sizes/font_size = 24
-text = "HP Campfire: "
 
 [node name="HealthBarCampfire" type="ProgressBar" parent="CanvasLayer"]
 offset_left = 43.0
@@ -263,3 +251,5 @@ offset_top = 42.0
 offset_right = 309.0
 offset_bottom = 78.0
 value = 100.0
+
+[connection signal="timeout" from="Collectibles/Timer" to="Collectibles" method="_on_timer_timeout"]

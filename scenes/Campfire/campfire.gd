@@ -3,33 +3,34 @@ extends CharacterBody2D
 class_name Campfire
 
 @export var maxHealth: int = 100
-@onready var healthBar = $"../CanvasLayer/HealthBarCampfire"
-@onready var healthBarLabel = $"../CanvasLayer/HealthBarCampfire/Label"
+@onready var healthBar: ProgressBar = $"../CanvasLayer/HealthBarCampfire"
+@onready var healthBarLabel: Label = $"../CanvasLayer/HealthBarCampfire/Label"
 
 var decrease_rate: int = 1
-var max_decrease_rate: int = 5
-var time_passed: float = 0.0
-var next_decrease_time: float = 20.0  # Час до наступного збільшення швидкості зниження здоров'я
+const MAX_DECREASE_RATE: int = 5
+const DECREASE_INTERVAL: float = 20.0
+var time_until_next_decrease: float = DECREASE_INTERVAL
 
 func _ready():
-	update_health_display()  # Оновити відображення здоров'я при запуску
+	update_health_display()
 
-# Функція для відновлення здоров'я багаття
 func add_health(amount: int):
-	maxHealth = min(maxHealth + amount, 100) # Переконуємося, що здоров'я не перевищить максимальне значення
-	update_health_display() # Оновлюємо інтерфейс здоров'я
-
+	maxHealth = min(maxHealth + amount, 100)
+	update_health_display()
 
 func _on_timer_timeout():
-	time_passed += 1.0
-	maxHealth = max(maxHealth - decrease_rate, 0)  # Запобігаємо від'ємному здоров'ю
-	update_health_display()  # Оновлюємо інтерфейс
+	maxHealth = max(maxHealth - decrease_rate, 0)
+	update_health_display()
 	
-	if time_passed >= next_decrease_time and decrease_rate < max_decrease_rate:
-		decrease_rate += 1
-		next_decrease_time += 20.0  # Встановлюємо час наступного збільшення швидкості зниження здоров'я
-		print("Speed increase to: ", decrease_rate)
+	time_until_next_decrease -= 1.0
+	if time_until_next_decrease <= 0 and decrease_rate < MAX_DECREASE_RATE:
+		increase_decrease_rate()
+
+func increase_decrease_rate():
+	decrease_rate += 1
+	time_until_next_decrease = DECREASE_INTERVAL
+	print("Speed increase to: ", decrease_rate)
 
 func update_health_display():
 	healthBar.value = maxHealth
-	healthBarLabel.text = "Campfire: " + str(maxHealth)
+	healthBarLabel.text = str("Campfire: %d" % maxHealth)

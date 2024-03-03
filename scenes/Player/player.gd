@@ -2,95 +2,62 @@ extends CharacterBody2D
 
 class_name Player
 
-# Accessing the AnimatedSprite2D node
-#@onready var anim = get_node("AnimatedSprite2D")
-@onready var anim = $AnimatedSprite2D
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+@onready var healthBar: ProgressBar = $"../CanvasLayer/HealthBarPlayer"
+@onready var campfire: Campfire = get_node_or_null("../Campfire") as Campfire
+var callable_add_health: Callable
 
-# Speed variable for the character
 @export var speed: int = 100
-
-# Variable to store the current direction of character movement
+@export var branches: int = 0
+@export var maxHealth: int = 100
 var direction: Vector2 = Vector2.ZERO
-# Variable to store the last direction of character movement
 var last_direction: Vector2 = Vector2.DOWN
 
-@export var branches: int = 0
+const DISTANCE_THRESHOLD: float = 50.0
 
-@export var maxHealth : int = 100 
-@onready var healthBar = $"../CanvasLayer/HealthBarPlayer"
+signal throw_branch_to_campfire(amount)
 
+func _ready():
+	if campfire:
+		callable_add_health = Callable(campfire, "add_health")
+		connect("throw_branch_to_campfire", callable_add_health)
+	else:
+		push_error("Campfire node not found.")
 
-@export var class_campfire: Campfire
-@onready var campfire = get_node_or_null("../Campfire") as Campfire
-
-# Processing user input
 func _process(delta):
 	direction = Input.get_vector("Left","Right","Up","Down")
 	if Input.is_action_just_pressed("Interact") and is_near_campfire():
 		throw_branch()
 
-# Приєднання сигналу до функції `add_health` багаття
-func _ready():
-	var callable = Callable(class_campfire, "add_health")
-	connect("throw_branch_to_campfire", callable)
-	
-	if not campfire:
-		print("Помилка: вузол 'Campfire' не знайдено.")
-	else:
-		print("Вузол 'Campfire' успішно знайдено.")
-	
-# Сигнал, який повідомляє про те, що гравець кидає гілку в багаття
-signal throw_branch_to_campfire(amount)
-
 func throw_branch():
-	if branches > 0 and is_near_campfire():
+	if branches > 0:
 		branches -= 1
-		if campfire:
-			campfire.add_health(2) # Переконайтесь, що метод існує в класі Campfire
-		else:
-			print("Помилка: спроба викликати 'add_health' на неіснуючому об'єкті.")
+		emit_signal("throw_branch_to_campfire", 2)
 
 func is_near_campfire() -> bool:
-	if not campfire:
-		return false
-	return global_position.distance_to(campfire.global_position) < 50
+	return campfire and global_position.distance_to(campfire.global_position) < DISTANCE_THRESHOLD
 
-
-# Increase in branches
 func pick_up():
-	print("Pick up one branch")
 	branches += 1
+	#queue_free()
 
-# Physics processing for movement and animation
 func _physics_process(delta):
-	# Calculating velocity based on direction
-	velocity = direction * speed
-	
-	# Checking if the character is moving
-	if direction != Vector2.ZERO:
+	var moving = direction != Vector2.ZERO
+	if moving:
 		last_direction = direction
-		
-		# Choosing animation based on movement direction
-		if direction.y < 0:
-			anim.play("Up Walk"	)
-		elif direction.y > 0:
-			anim.play("Down Walk")
-		elif direction.x != 0:
-			anim.play("Side Walk")
-			anim.flip_h = direction.x > 0
-	else: 
-		# Gradually reducing speed to zero
-		velocity.x = move_toward(velocity.x, 0, speed)
-		velocity.y = move_toward(velocity.y, 0, speed)
-		
-		# Choosing the Idle animation based on the last direction of movement
-		if last_direction.y < 0: 
-			anim.play("Up Idle")
-		elif last_direction.y > 0:
-			anim.play("Down Idle")
-		elif last_direction.x != 0:
-			anim.play("Side Idle")
-			anim.flip_h = last_direction.x > 0
+		anim.play(get_animation_for_direction(direction))
+		anim.flip_h = direction.x > 0
+		velocity = direction * speed
+	else:
+		anim.play(get_idle_animation_for_direction(last_direction))
+		anim.flip_h = last_direction.x > 0
+		velocity = Vector2.ZERO
 
 	healthBar.value = maxHealth
 	move_and_slide()
+
+func get_animation_for_direction(dir: Vector2) -> String:
+	return "Side Walk" if dir.x != 0 else ("Up Walk" if dir.y < 0 else "Down Walk")
+
+func get_idle_animation_for_direction(dir: Vector2) -> String:
+	return "Side Idle" if dir.x != 0 else ("Up Idle" if dir.y < 0 else "Down Idle")
